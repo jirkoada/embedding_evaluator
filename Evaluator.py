@@ -166,5 +166,3 @@ if __name__ == '__main__':
     evaluate_file(options.corpus,int(options.topn), options.model)
 
 
-
-
