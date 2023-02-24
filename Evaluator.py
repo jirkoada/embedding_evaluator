@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-__author__ = 'svobik'
+__author__ = 'jirkoada'  # Original code by Svobikl. Fixed some errors related to gensim updates.
+
+# accepts both binary fasttext and plain-text models
 
 from gensim.models.word2vec import Word2Vec
+from gensim.models.fasttext import load_facebook_model
 from gensim import corpora, models, similarities, matutils
 import re
 import os
@@ -75,7 +78,7 @@ def evaluate_file(filePath, topN, outputFile):
                     prevCategory = line
                     classNumb = classNumb + 1
 
-                print line
+                print (line)
                 accuracy = 0.0
                 accuracyCosMul = 0.0
                 classItemsCount = 0
@@ -95,7 +98,7 @@ def evaluate_file(filePath, topN, outputFile):
                             accuracy =accuracy + 1.0
                             accuracyAll =accuracyAll + 1.0
 
-                except KeyError,e:
+                except KeyError as e:
                     logging.error(e)
                     wordErr = str(e).encode("utf-8")
                     notSeenCounter = notSeenCounter + 1.0
@@ -123,13 +126,13 @@ def evaluate_file(filePath, topN, outputFile):
     syntacticAcc = avgVal / count
 
 
-    print "Total accuracy TOP%d = %f \n" % (topN,(accuracyAll/questionsCount)*100.0)
+    print ("Total accuracy TOP%d = %f \n" % (topN,(accuracyAll/questionsCount)*100.0))
     fw.write("Total accuracy TOP%d = %f \n" % (topN,(accuracyAll/questionsCount)*100.0))
     fw.write("Semantic accuracy TOP%d = %f \n" % (topN,semanticAcc))
     fw.write("Syntactic accuracy TOP%d = %f \n" % (topN,syntacticAcc))
     #print "Total accuracy CosMul TOP%d = %f" % (topN,(accuracyAllCosMul/questionsCount)*100.0)
     #fw.write("Total accuracy CosMul TOP%d = %d", (topN,(accuracyAllCosMul/questionsCount)*100.0))
-    print "Seen= %f" % (((questionsCount-notSeenCounter)/questionsCount) * 100.0)
+    print ("Seen= %f" % (((questionsCount-notSeenCounter)/questionsCount) * 100.0))
     fw.write("Seen= %f"% (((questionsCount-notSeenCounter)/questionsCount) * 100.0))
 
     for word in np.unique(listErr):
@@ -153,7 +156,13 @@ if __name__ == '__main__':
                       help='TOP N similar words')
     options, args = parser.parse_args()
 
-    model = Word2Vec.load_word2vec_format(options.model,binary=False)
+
+    if options.model[-3:] == "bin":
+        model = load_facebook_model(options.model)
+        model = model.wv
+    else:
+        model = models.KeyedVectors.load_word2vec_format(options.model,binary=False)
+    model.init_sims()
     evaluate_file(options.corpus,int(options.topn), options.model)
 
 
