@@ -1,42 +1,5 @@
-# cz_corpus
-
-The word embedding methods have been proven to be very
-useful in many tasks of NLP (Natural Language Processing). Much has
-been investigated about word embeddings of English words and phrases,
-but only little attention has been dedicated to other languages.
-Our goal in this paper is to explore the behavior of state-of-the-art
-word embedding methods on Czech, the language that is characterized
-by very rich morphology. We introduce new corpus for word analogy
-task that inspects syntactic, morphosyntactic and semantic properties
-of Czech words and phrases. We experiment with Word2Vec and GloVe
-algorithms and discuss the results on this corpus. The corpus is available
-for the research community.
-
-### Note
-
-Results in an article are lower due to the fact that we have used dataset trained with phrases and default W2V settings, that is not suited for less amount of data as the Czech Wikipedia has. Result was a dataset with lower single word performance, see our other publications that correct our results.
-
-For testing the words analogies only, please use no_phrase dataset. 
-
-### Cite
-please cite this article: 
-```
-@inproceedings{svoboda:16,
-author = {Svoboda, Lukáš and Brychcín, Tomáš},
-year = {2016},
-month = {04},
-pages = {103–114},
-booktitle = {Computational Linguistics and Intelligent Text Processing},
-publisher={Springer},
-doi= {10.1007/978-3-319-75477-2},
-title = {New word analogy corpus for exploring embeddings of Czech words}
-}
-```
-
-check our other articles that correct the results and cite them if you like the ideas and want to continue with related research topics
-```
-https://scholar.google.com/citations?user=QItlY7oAAAAJ&hl=cs&oi=ao
-```
+# Word Embedding Evalutor
+Fork of [cz_corpus](https://github.com/Svobikl/cz_corpus) by Lukas Svoboda. Fixed some errors related to Gensim updates and adapted model loading for fasttext models - both binary and plain-text.
 
 ### Testing corpus with Python and Gensim
 
@@ -48,10 +11,11 @@ Prerequisites:
 
 Clone repository and uncompress model: 
 
- - "git clone https://github.com/Svobikl/cz_corpus Evaluator"
+ - "git clone https://github.com/jirkoada/embedding_evaluator Evaluator"
  - Download model from following address: "https://github.com/Svobikl/cz_corpus/releases/tag/release1.0/vectors_cz_cbow_dim300uni400_w15n15_iter15.txt.tar.gz" and save it to
 folder "models/no_phrase"
  - Alternatively you can download other models from "https://github.com/Svobikl/cz_corpus/releases/tag/release1.0" 
+ - You can also download a pretrained fasstext model for Czech language from "https://fasttext.cc/docs/en/crawl-vectors.html"
  - "tar -zxvf Evaluator/models/no_phrase/vectors_cz_cbow_dim300uni400_w15n15_iter15.tar.gz"
 
 Running evaluator:
