@@ -30,4 +30,15 @@ Settings:
 - "-c" : corpus path specification, default is "./corpus/czech_emb_corpus.txt",
 - or you can use "help" command and see all possible argument settings.
 
-
+<cite>
+@inproceedings{svoboda:16,
+author = {Svoboda, Lukáš and Brychcín, Tomáš},
+year = {2016},
+month = {04},
+pages = {103–114},
+booktitle = {Computational Linguistics and Intelligent Text Processing},
+publisher={Springer},
+doi= {10.1007/978-3-319-75477-2},
+title = {New word analogy corpus for exploring embeddings of Czech words}
+}
+<cite>
