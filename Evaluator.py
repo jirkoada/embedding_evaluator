@@ -25,20 +25,20 @@ def cosine_vector_similarity(vec_a, vec_b):
    return sim
 
 def result_vector(st1,st2,st3, model):
-    vec1 = model.syn0norm[model.vocab[st1].index]
-    vec2 = model.syn0norm[model.vocab[st2].index]
-    vec3 = model.syn0norm[model.vocab[st3].index]
+    vec1 = model.get_vector(st1, norm=True)
+    vec2 = model.get_vector(st2, norm=True)
+    vec3 = model.get_vector(st3, norm=True)
 
-    sub_vec = map(operator.sub, vec2,vec1)
-    result_vec = map(operator.add, sub_vec, vec3)
+    sub_vec = list(map(operator.sub, vec2,vec1))
+    result_vec = list(map(operator.add, sub_vec, vec3))
 
     return result_vec
 def most_similar_to_vec(vector,model,topn, list_words):
-    dists = np.dot(model.syn0norm, vector)
+    dists = np.dot(model.get_normed_vectors(), vector)
 
     best = matutils.argsort(dists, topn=topn + len(list_words), reverse=True)
     # ignore (don't return) words from the input
-    result = [(model.index2word[sim], float(dists[sim])) for sim in best if model.index2word[sim] not in list_words]
+    result = [(model.index_to_key[sim], float(dists[sim])) for sim in best if model.index_to_key[sim] not in list_words]
 
     return result[:topn]
 def evaluate_file(filePath, topN, outputFile):
@@ -74,7 +74,7 @@ def evaluate_file(filePath, topN, outputFile):
                     else :
                         listAccSynt.append(currAcc)
                     print(prevCategory + " > accuracy TOP%d = %f (%d/%d)\n" % (topN,currAcc, accuracy,classItemsCount))
-                    fw.write(prevCategory.encode('utf-8') + " > accuracy TOP%d = %f (%d/%d) \n" % (topN,currAcc, accuracy,classItemsCount))
+                    fw.write(prevCategory + " > accuracy TOP%d = %f (%d/%d) \n" % (topN,currAcc, accuracy,classItemsCount))
                     prevCategory = line
                     classNumb = classNumb + 1
 
@@ -102,14 +102,14 @@ def evaluate_file(filePath, topN, outputFile):
                     logging.error(e)
                     wordErr = str(e).encode("utf-8")
                     notSeenCounter = notSeenCounter + 1.0
-                    listErr.append(e)
+                    listErr.append(wordErr)
 
     if classItemsCount!=0:
         currAcc= (accuracy/classItemsCount)*100.0
         currAccCosMul= (accuracyCosMul/classItemsCount)*100.0
         listAccSynt.append(currAcc)
         print(prevCategory + " > accuracy TOP%d = %f (%d/%d)\n" % (topN,currAcc, accuracy,classItemsCount))
-        fw.write(prevCategory.encode('utf-8') + " > accuracy TOP%d = %f (%d/%d)\n" % (topN,currAcc, accuracy,classItemsCount))
+        fw.write(prevCategory + " > accuracy TOP%d = %f (%d/%d)\n" % (topN,currAcc, accuracy,classItemsCount))
 
     avgVal = 0.0
     count= 0.0
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         model = model.wv
     else:
         model = models.KeyedVectors.load_word2vec_format(options.model,binary=False)
-    model.init_sims()
+    model.fill_norms()
     evaluate_file(options.corpus,int(options.topn), options.model)
 
 
