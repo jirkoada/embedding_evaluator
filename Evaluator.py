@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'jirkoada'  # Original code by Svobikl. Fixed some errors related to gensim updates.
 
-# accepts both binary fasttext and plain-text models
+# accepts both binary fasttext and plain-text models, as well as compressed fasttext models created via compress-fasttext package
 
 from gensim.models.word2vec import Word2Vec
 from gensim.models.fasttext import load_facebook_model
@@ -148,21 +148,24 @@ if __name__ == '__main__':
 
     parser = optparse.OptionParser(usage="%prog [OPTIONS]")
     parser.add_option('-m', '--model', default='./models/vectors_cz_cbow_dim300_w10_phrase.txt',
-
                       help='Give a path with the name of a model to load (default name= vector.txt)')
     parser.add_option('-c', '--corpus', default='./corpus/czech_emb_corpus.txt',
                       help='Give a name of corpus to analyze  (default: ./corpus/czech_emb_corpus.txt)')
     parser.add_option('-t', '--topn', default='1',
                       help='TOP N similar words')
+    parser.add_option('--compressed', default=False, action="store_true",
+                      help='Indicate the model was compressed with compress-fasttext')
     options, args = parser.parse_args()
 
 
-    if options.model[-3:] == "bin":
-        model = load_facebook_model(options.model)
-        model = model.wv
+    if options.model[-3:] == "txt" or options.model[-3:] == "vec":
+        model = models.KeyedVectors.load_word2vec_format(options.model, binary=False)
     else:
-        model = models.KeyedVectors.load_word2vec_format(options.model,binary=False)
+        if options.compressed:
+            import compress_fasttext
+            model = compress_fasttext.models.CompressedFastTextKeyedVectors.load(options.model)
+        else:
+            model = load_facebook_model(options.model)
+            model = model.wv
     model.fill_norms()
     evaluate_file(options.corpus,int(options.topn), options.model)
-
-
