@@ -8,6 +8,7 @@ Prerequisites:
 - Python >2.7
 - Gensim package for word2vec toolkit
 - Numpy package
+- [compress-fasttext](https://github.com/avidale/compress-fasttext) (optional)
 
 Clone repository and uncompress model: 
 
