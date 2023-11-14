@@ -28,7 +28,7 @@ Running evaluator:
 Settings: 
 - "-m" : model path specification
 - "-t" : top n similar words,  default is 1.
-- "-c" : corpus path specification, default is "./corpus/czech_emb_corpus.txt",
+- "-c" : corpus path specification, default is "./corpus/diacritics/czech_emb_corpus.txt",
 - "--compressed": Indicate the evaluated model was compressed with [compress-fasttext](https://github.com/avidale/compress-fasttext)
 - or you can use "help" command and see all possible argument settings.
 
