@@ -1,4 +1,4 @@
-# Word Embedding Evalutor
+# Word Embedding Evaluator
 Fork of [cz_corpus](https://github.com/Svobikl/cz_corpus) by Lukas Svoboda. Ported to Python3/Gensim 4.3.0, adapted model loading for fasttext models - both binary and plain-text, as well as compressed models.
 
 ### Testing corpus with Python and Gensim
