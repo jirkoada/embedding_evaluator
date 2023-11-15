@@ -149,8 +149,8 @@ if __name__ == '__main__':
     parser = optparse.OptionParser(usage="%prog [OPTIONS]")
     parser.add_option('-m', '--model', default='./models/vectors_cz_cbow_dim300_w10_phrase.txt',
                       help='Give a path with the name of a model to load (default name= vector.txt)')
-    parser.add_option('-c', '--corpus', default='./corpus/czech_emb_corpus.txt',
-                      help='Give a name of corpus to analyze  (default: ./corpus/czech_emb_corpus.txt)')
+    parser.add_option('-c', '--corpus', default='./corpus/diacritics/czech_emb_corpus.txt',
+                      help='Give a name of corpus to analyze  (default: ./corpus/diacritics/czech_emb_corpus.txt)')
     parser.add_option('-t', '--topn', default='1',
                       help='TOP N similar words')
     parser.add_option('--compressed', default=False, action="store_true",
