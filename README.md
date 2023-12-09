@@ -1,8 +1,6 @@
 # Word Embedding Evaluator
 Fork of [cz_corpus](https://github.com/Svobikl/cz_corpus) by Lukas Svoboda. Ported to Python3/Gensim 4.3.0, adapted model loading for fasttext models - both binary and plain-text, as well as compressed models.
 
-### Testing corpus with Python and Gensim
-
 Prerequisites: 
 
 - Python >= 3.10
@@ -29,5 +27,18 @@ Settings:
 - "-c" : corpus path specification, default is "./corpus/diacritics/czech_emb_corpus.txt",
 - "--compressed": Indicate the evaluated model was compressed with [compress-fasttext](https://github.com/avidale/compress-fasttext)
 - or you can use "help" command and see all possible argument settings.
+
+## References
+
+    @inproceedings{svoboda:16,
+    author = {Svoboda, Lukáš and Brychcín, Tomáš},
+    year = {2016},
+    month = {04},
+    pages = {103–114},
+    booktitle = {Computational Linguistics and Intelligent Text Processing},
+    publisher={Springer},
+    doi= {10.1007/978-3-319-75477-2},
+    title = {New word analogy corpus for exploring embeddings of Czech words}
+    }
 
 
