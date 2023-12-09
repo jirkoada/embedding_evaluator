@@ -14,7 +14,7 @@ Clone the repository and obtain models:
 
     git clone https://github.com/jirkoada/embedding_evaluator Evaluator
 
- - You can download a pre-trained fasstext model for the Czech language from "https://fasttext.cc/docs/en/crawl-vectors.html"
+ - You can download a pre-trained fasstext model for the Czech language from https://fasttext.cc/docs/en/crawl-vectors.html
  - Visit the original [repo](https://github.com/Svobikl/cz_corpus) to explore models released alongside it
 
 Running the evaluator:
