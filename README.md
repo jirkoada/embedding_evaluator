@@ -28,5 +28,17 @@ Settings:
 - "--compressed": Indicate the evaluated model was compressed with [compress-fasttext](https://github.com/avidale/compress-fasttext)
 - or you can use "help" command and see all possible argument settings.
 
-## References
-[1] Svoboda and Brychcín, [New word analogy corpus for exploring embeddings of Czech words](https://doi.org/10.1007/978-3-319-75477-2), 2016
+## Attributions
+Please cite the original article: 
+```
+@inproceedings{svoboda:16,
+author = {Svoboda, Lukáš and Brychcín, Tomáš},
+year = {2016},
+month = {04},
+pages = {103–114},
+booktitle = {Computational Linguistics and Intelligent Text Processing},
+publisher={Springer},
+doi= {10.1007/978-3-319-75477-2},
+title = {New word analogy corpus for exploring embeddings of Czech words}
+}
+```
